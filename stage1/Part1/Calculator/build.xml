@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Calculator" default="run">
+     
+    <property name="build.classes.dir" location="build/classes"/>
+    <property name="src.dir" location="src" />
+
+		<target name="clean">
+				<delete>
+						<fileset dir="${build.classes.dir}" includes="*.class" />
+				</delete>
+		</target>
+    
+		<target name="compile">
+        <javac srcdir="${src.dir}" destdir="${build.classes.dir}" includeAntRuntime="false">
+        </javac>
+    </target>
+
+		<target name="run" depends="clean, compile">
+				<java fork="true" classname="Calculator">
+						<classpath path="${build.classes.dir}" />
+				</java>
+		</target>
+</project>
+

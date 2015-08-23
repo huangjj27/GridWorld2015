@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<project name="HelloWorld" default="run">
+     
+    <property name="build.classes.dir" location="build/classes"/>
+    <property name="src.dir" location="src" />
+		<property name="lib.dir" location="lib" />
+    
+		<path id="compile.path">
+				<pathelement location="${lib.dir}/junit-4.9.jar" />
+		</path>
+		
+    <target name="clean">
+				<delete dir="${build.classes.dir}" />
+				<mkdir dir="${build.classes.dir}"/>
+    </target>
+     
+    <target name="compile">
+        <javac srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="compile.path" includeantruntime="true">
+        </javac> 
+    </target>    
+
+    <target name="run" depends="clean, compile">
+				<java fork="true" classname="HelloWorld">
+						<classpath path="${build.classes.dir}" />
+				</java>
+    </target>
+
+		<target name="junit" depends="compile">
+				<junit printsummary="true">
+						<classpath path="${src.dir}" >
+							<path refid="compile.path" />
+						</classpath>
+						<test name="HelloWorldTest"/>
+				</junit>
+		</target>
+</project>
