@@ -1,34 +1,34 @@
 <?xml version="1.0"?>
 <project name="Jumper" default="run">
-	<property name="run.classpath" value="Jumper"/>
-	<property name="run.srcpath" value="Jumper"/>
-	<property name="test.srcpath" value="Jumper"/>
-	<property name="lib.dir" value="lib"/>
+  <property name="run.classpath" value="Jumper"/>
+  <property name="run.srcpath" value="Jumper"/>
+  <property name="test.srcpath" value="Jumper"/>
+  <property name="lib.dir" value="lib"/>
 
-	<path id="compile.path">
-		<pathelement location = "${lib.dir}/junit-4.9.jar"/>
-		<pathelement location = "${lib.dir}/gridworld.jar"/>
-	</path>
+  <path id="compile.path">
+    <pathelement location = "${lib.dir}/junit-4.9.jar"/>
+    <pathelement location = "${lib.dir}/gridworld.jar"/>
+  </path>
 
-	<target name="compile">
-		<javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path"/>
-	</target>
+  <target name="compile">
+    <javac destdir="${run.classpath}" srcdir="${run.srcpath}" classpathref="compile.path"/>
+  </target>
 
-	<target name="junit" depends="compile">
-		<junit printsummary="true">
-			<classpath path="${run.classpath}">
-				<path refid="compile.path"/>
-			</classpath>
-			<test name="JumperTest"/>
-		</junit>
-	</target>
+  <target name="junit" depends="compile">
+    <junit printsummary="true">
+      <classpath path="${run.classpath}">
+        <path refid="compile.path"/>
+      </classpath>
+      <test name="JumperTest"/>
+    </junit>
+  </target>
 
-	<target name= "run" depends="junit">
-		<java fork = "true" classname="JumperRunner" classpath="${run.classpath}" classpathref="compile.path"/>
-	</target>
-	
-	  <target name="doc">
-	      <javadoc destdir="" encoding="UTF-8" docencoding="UTF-8">
+  <target name= "run" depends="junit">
+    <java fork = "true" classname="JumperRunner" classpath="${run.classpath}" classpathref="compile.path"/>
+  </target>
+
+    <target name="doc">
+        <javadoc destdir="" encoding="UTF-8" docencoding="UTF-8">
             <packageset dir="${run.srcpath}">
                 <include name="**"/>
             </packageset>
