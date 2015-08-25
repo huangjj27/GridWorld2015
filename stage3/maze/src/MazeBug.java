@@ -23,7 +23,12 @@ public class MazeBug extends Bug {
   public boolean isEnd = false;
   public Stack<ArrayList<Location>> crossLocation;
   public Integer stepCount = 0;
+  public ArrayList<Location> rightPath;
   boolean hasShown = false;// final message has been shown
+  // four direction prediction possibility.
+  // four number stand for NORTH, EAST, SOUTH, West.
+  public int[] dirPrc = { 1, 1, 1, 1 };
+  private static int rightAngle = 90;
 
   /**
    * Constructs a box bug that traces a square of a given side length
@@ -32,6 +37,16 @@ public class MazeBug extends Bug {
     setColor(Color.GREEN);
     last = new Location(0, 0);
     crossLocation = new Stack<ArrayList<Location>>();
+    rightPath = new ArrayList<Location>();
+  }
+
+  public Stack<ArrayList<Location>> getCross() {
+    return crossLocation;
+  }
+
+  public String getPredict() {
+    return "[" + dirPrc[0] + ", " + dirPrc[1] + ", " + dirPrc[2] + ", "
+        + dirPrc[3] + "]";
   }
 
   /**
@@ -49,6 +64,8 @@ public class MazeBug extends Bug {
     }
     boolean willMove = canMove();
     if (isEnd == true) {
+
+      showPath();
       // to show step count when reach the goal
       if (hasShown == false) {
         String msg = stepCount.toString() + " steps";
@@ -67,6 +84,10 @@ public class MazeBug extends Bug {
       ArrayList<Location> currentBranch = crossLocation.pop();
       currentBranch.add(getLocation());
       crossLocation.push(currentBranch);
+      // a new Branch is created. change Prediction.
+      if (currentBranch.size() == 1) {
+        increasePredict(locBefore, getLocation());
+      }
 
       // increase step count when move
       stepCount++;
@@ -75,11 +96,34 @@ public class MazeBug extends Bug {
       // flower to show that the location has been accessed to.
       ArrayList<Location> currentBranch = crossLocation.pop();
       currentBranch.remove(currentBranch.size() - 1);
+      // if the branch is not empty, it must push in.
       if (currentBranch.size() > 0) {
         crossLocation.push(currentBranch);
       }
       goBack();
+
+      // a Branch is deleted. change Prediction.
+      if (currentBranch.size() == 0) {
+        decreasePredict(getLocation(), locBefore);
+      }
       stepCount++;
+    }
+  }
+
+  private void showPath() {
+    Grid gr = getGrid();
+    while (!crossLocation.isEmpty()) {
+      ArrayList<Location> currentBranch = crossLocation.pop();
+      if (!currentBranch.isEmpty()) {
+        for (Location loc : currentBranch) {
+          rightPath.add(loc);
+        }
+      }
+    }
+
+    for (Location loc : rightPath) {
+      Actor act = (Actor) gr.get(loc);
+      act.setColor(Color.GREEN);
     }
   }
 
@@ -97,11 +141,11 @@ public class MazeBug extends Bug {
       return null;
     }
     ArrayList<Location> valid = new ArrayList<Location>();
-    int directions[] = { Location.AHEAD, Location.LEFT, Location.RIGHT,
-        Location.HALF_CIRCLE };
+    int directions[] = { Location.NORTH, Location.EAST, Location.SOUTH,
+        Location.WEST };
 
     for (int d : directions) {
-      Location neighbor = loc.getAdjacentLocation(getDirection() + d);
+      Location neighbor = loc.getAdjacentLocation(d);
       if (gr.isValid(neighbor)) {
         Actor neighborActor = gr.get(neighbor);
         if (isDestination(neighbor)) {
@@ -116,11 +160,6 @@ public class MazeBug extends Bug {
     }
 
     return valid;
-  }
-
-  private boolean isDestination(Location loc) {
-    Actor locActor = getGrid().get(loc);
-    return (locActor instanceof Rock && locActor.getColor().equals(Color.RED));
   }
 
   /**
@@ -151,8 +190,7 @@ public class MazeBug extends Bug {
     // get the next location to move to randomly.
     Location loc = getLocation();
     ArrayList<Location> nexts = getValid(loc);
-    Random rand = new Random();
-    int nextNum = rand.nextInt(nexts.size());
+    int nextNum = getNextNum(nexts);
     next = nexts.get(nextNum);
 
     if (gr.isValid(next)) {
@@ -168,6 +206,30 @@ public class MazeBug extends Bug {
     flower.putSelfInGrid(gr, loc);
   }
 
+  private int getNextNum(ArrayList<Location> nexts) {
+    Random rand = new Random();
+    int sum0 = dirPrc[0];
+    int sum1 = sum0 + dirPrc[1];
+    int sum2 = sum1 + dirPrc[2];
+    int sum3 = sum2 + dirPrc[3];
+
+    int temp = rand.nextInt(sum3);
+    if (temp < sum0) {
+      temp = 0;
+    } else if (temp < sum1) {
+      temp = 1;
+    } else if (temp < sum2) {
+      temp = 2;
+    } else {
+      temp = 3;
+    }
+    while (temp > 0 && temp >= nexts.size()) {
+      temp--;
+    }
+
+    return temp;
+  }
+
   private void goBack() {
     Grid<Actor> gr = getGrid();
     Location loc = getLocation();
@@ -176,12 +238,26 @@ public class MazeBug extends Bug {
 
     setDirection(getLocation().getDirectionToward(lastLoc));
     moveTo(lastLoc);
+
     Flower flower = new Flower(getColor());
     flower.putSelfInGrid(gr, loc);
   }
 
-  public Stack<ArrayList<Location>> getCross() {
-    return crossLocation;
+  private boolean isDestination(Location loc) {
+    Actor locActor = getGrid().get(loc);
+    return (locActor instanceof Rock && locActor.getColor().equals(Color.RED));
   }
-}
 
+  private void decreasePredict(Location locBefore, Location locNew) {
+    int dir = (int) ((locBefore.getDirectionToward(locNew)) / rightAngle);
+    if (dirPrc[dir] > 1) {
+      dirPrc[dir]--;
+    }
+  }
+
+  private void increasePredict(Location locBefore, Location locNew) {
+    int dir = (int) ((locBefore.getDirectionToward(locNew)) / rightAngle);
+    dirPrc[dir]++;
+  }
+
+}
