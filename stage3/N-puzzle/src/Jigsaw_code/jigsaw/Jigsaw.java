@@ -290,7 +290,8 @@ public class Jigsaw {
     currentJNode = beginJNode;
     openList.addElement(currentJNode);
     while (!openList.isEmpty()) {
-      // can't use equal operator '=' for it compares pointer rather than the object
+      // can't use equal operator '=' for it compares pointer rather than the
+      // object
       if (currentJNode.equals(endJNode)) {
         isCompleted = true;
         calSolutionPath();
@@ -379,19 +380,50 @@ public class Jigsaw {
   }
 
   /**
-   * （Demo+实验二）计算并修改状态节点jNode的代价估计值:f(n)=s(n)。 s(n)代表后续节点不正确的数码个数
+   * （Demo+实验二）计算并修改状态节点jNode的代价估计值:f(n)=uncorrect(n)+depth(n)+Manhattan(n).
+   * uncorrect(n)代表后续节点不正确的数码个数, depth(n) is the depth from beginJNode to Node
+   * n. manhattan(n) is the manhattan distance from a position of currentJNode
+   * to endJNode
    * 
    * @param jNode
    *          - 要计算代价估计值的节点；此函数会改变该节点的estimatedValue属性值。
    */
-  private void estimateValue(JigsawNode jNode) {
-    int s = 0; // 后续节点不正确的数码个数
+
+  private void estimateValue(JigsawNode jNode) { // 后续节点不正确的数码个数
+    int uncorrect = 0;
     int dimension = JigsawNode.getDimension();
     for (int index = 1; index < dimension * dimension; index++) {
       if (jNode.getNodesState()[index] + 1 != jNode.getNodesState()[index + 1])
-        s++;
+        uncorrect++;
     }
-    jNode.setEstimatedValue(s);
+
+    // find the manhattan distance. that is, the sum of each piece's manhantan
+    // distance.
+    int manhattanDistance = 0;
+    int distance = 0;
+    for (int currentIndex = 1; currentIndex < dimension * dimension; currentIndex++) {
+      for (int targetIndex = 1; targetIndex < dimension * dimension; targetIndex++) {
+        // coordinate from (0, 0) to (dimension-1, dimension-1)
+        int currentPiece = jNode.getNodesState()[currentIndex];
+        int targetPiece = endJNode.getNodesState()[targetIndex];
+
+        // when we compare a pair of pieces, no need to continue the inner loop.
+        if (currentPiece != 0 && currentPiece == targetPiece) {
+          int currentX = (currentIndex - 1) / dimension;
+          int currentY = (currentIndex + 4) % dimension;
+          int targetX = (targetIndex - 1) / dimension;
+          int targetY = (targetIndex + 4) % dimension;
+          int dx = Math.abs(currentX - targetX);
+          int dy = Math.abs(currentY - targetY);
+          manhattanDistance += (dx + dy);
+          distance += Math.sqrt(dx * dx + dy * dy);
+          break;
+        }
+      }
+    }
+    int estimate = (int) (uncorrect * 382 + manhattanDistance * 618 + distance * 382 + jNode
+        .getNodeDepth() * 100);
+    jNode.setEstimatedValue(estimate);
   }
 
 }
