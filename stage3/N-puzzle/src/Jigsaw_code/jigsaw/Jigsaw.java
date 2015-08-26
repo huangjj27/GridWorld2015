@@ -389,14 +389,21 @@ public class Jigsaw {
    *          - 要计算代价估计值的节点；此函数会改变该节点的estimatedValue属性值。
    */
 
-  private void estimateValue(JigsawNode jNode) { // 后续节点不正确的数码个数
-    int uncorrect = 0;
+  private void estimateValue(JigsawNode jNode) {
+    // 后续节点不正确的数码个数
+    int uncorrectAfter = 0;
     int dimension = JigsawNode.getDimension();
     for (int index = 1; index < dimension * dimension; index++) {
       if (jNode.getNodesState()[index] + 1 != jNode.getNodesState()[index + 1])
-        uncorrect++;
+        uncorrectAfter++;
     }
 
+    // the current position get wrong piece.
+    int uncorrectPiece = 0;
+    for (int index = 1; index < dimension * dimension; index++) {
+      if (jNode.getNodesState()[index] != endJNode.getNodesState()[index])
+        uncorrectPiece++;
+    }
     // find the manhattan distance. that is, the sum of each piece's manhantan
     // distance.
     int manhattanDistance = 0;
@@ -421,8 +428,18 @@ public class Jigsaw {
         }
       }
     }
-    int estimate = (int) (uncorrect * 382 + manhattanDistance * 618 + distance * 382 + jNode
-        .getNodeDepth() * 100);
+    
+    // this formula has a success property of 12 in 20 test.
+    // int estimate = (int) (uncorrectAfter * 350 + manhattanDistance * 700 + distance * 250 + uncorrectPiece * 0);
+    // this formula has a success property of 12 in 20 test.
+    // int estimate = (int) (uncorrectAfter * 382 + manhattanDistance * 618 + distance * 62 + uncorrectPiece * 38);
+    // this formula has a success property of 13 in 20 test.
+    // int estimate = (int) (uncorrectAfter * 382 + manhattanDistance * 618 + distance * 100 + uncorrectPiece * 50);
+    // this formula has a success property of 18 in 20 test.
+    int estimate = (int) (uncorrectAfter * 382 + manhattanDistance * 618 + distance * 200 + uncorrectPiece * 0);
+    // this formula has a success property of 15 in 20 test.
+    // int estimate = (int) (uncorrectAfter * 420 + manhattanDistance * 679 + distance * 200 + uncorrectPiece * 0);
+    
     jNode.setEstimatedValue(estimate);
   }
 

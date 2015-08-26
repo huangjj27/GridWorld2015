@@ -9,6 +9,7 @@ import jigsaw.JigsawNode;
 
 public class RunnerPart2 {
   private static int caseNum = 20;
+
   /**
    * 测试脚本-2 实验任务二：利用启发式搜索，求解随机5*5拼图（24-数码问题）
    * 注意：运行前要修改节点维数，将JigsawNode类中的dimension改为5 要求：不修改脚本内容，程序能够运行，且得出预期结果
@@ -24,7 +25,7 @@ public class RunnerPart2 {
       return;
     }
 
-    int search[] = new int [caseNum];
+    int search[] = new int[caseNum];
     for (int i = 0; i < caseNum; i++) {
       // 生成目标状态对象destNode:
       // {25,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0};
@@ -43,21 +44,22 @@ public class RunnerPart2 {
       jigsaw.ASearch();
       search[i] = jigsaw.getSearchedNodesNum();
     }
-    
+
     int sum = 0;
     int sucess = 0;
     String filePath = "ASearchCaseDialog.txt";
     PrintWriter pw = new PrintWriter(new FileWriter(filePath));
     for (int i = 0; i < caseNum; i++) {
-      sum += search[i];
       if (search[i] < 30000) {
+        sum += search[i];
         sucess++;
       }
-      pw.append("case " + Integer.toString(i+1)+ " searched nodes: " + Integer.toString(search[i])+"\n");
+      pw.append("case " + Integer.toString(i + 1) + " searched nodes: "
+          + Integer.toString(search[i]) + "\n");
     }
-    int average = sum / caseNum;
-    pw.append("average search nodes: " + Integer.toString(average));
-    pw.append("pass cases: " + Integer.toString(sucess)+"\n");
+    int average = sum / success;
+    pw.append("average search nodes: " + Integer.toString(average) + "\n");
+    pw.append("pass cases: " + Integer.toString(sucess) + "\n");
     pw.close();
   }
 }
