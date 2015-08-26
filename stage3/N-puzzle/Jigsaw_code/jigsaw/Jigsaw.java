@@ -274,7 +274,7 @@ public class Jigsaw {
   // ****************************************************************
 
   /**
-   * （实验一）广度优先搜索算法，求解指定3*3拼图（8-数码问题）的最优解。 要求函数结束后：1,isCompleted记录了求解完成状态；
+   * （实验一）广度优先搜索算法，求解指定3*3拼图（8-数码问题）的最优解。 要求函数结束后： 1,isCompleted记录了求解完成状态；
    * 2,closeList记录了所有访问过的节点； 3,searchedNodesNum记录了访问过的节点数； 4,solutionPath记录了解路径。
    * 
    * @return isCompleted, 搜索成功时为true,失败为false
@@ -286,7 +286,26 @@ public class Jigsaw {
     PrintWriter pw = new PrintWriter(new FileWriter(filePath));
     // *************************************
 
-    // Write your code here.
+    // must update the currentNode
+    currentJNode = beginJNode;
+    openList.addElement(currentJNode);
+    while (!openList.isEmpty()) {
+      // can't use equal operator '=' for it compares pointer rather than the object
+      if (currentJNode.equals(endJNode)) {
+        isCompleted = true;
+        calSolutionPath();
+        break;
+      } else {
+        Vector<JigsawNode> child = findFollowJNodes(currentJNode);
+        for (JigsawNode ch : child) {
+          openList.addElement(ch);
+        }
+        openList.removeElement(currentJNode);
+        closeList.addElement(currentJNode);
+        currentJNode = openList.firstElement();
+        searchedNodesNum++;
+      }
+    }
 
     // *************************************
     this.printResult(pw);
