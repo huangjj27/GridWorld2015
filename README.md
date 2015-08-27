@@ -4,8 +4,8 @@ SYSU junior training
 the organization of the project
 
 #stage1 - project beginning
-  HelloWorld - first java program, learn about ant, junit.
-  Calculator - a simple java program, learn about ant, sonarQube
+    HelloWorld - first java program, learn about ant, junit.
+    Calculator - a simple java program, learn about ant, sonarQube
 #stage2 - basic tasks
 ##Part2 - gets familiar to the GridWorld program
     CircleBug - extands the Bug class, making a bug trace an octagon.
