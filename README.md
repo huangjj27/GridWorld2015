@@ -1,12 +1,13 @@
 # GridWorld2015
 SYSU junior training
 
-the organization of the project
 
-### stage1 - project beginning
+## the organization of the project
+<pre>
+stage1 - project beginning
     HelloWorld - first java program, learn about ant, junit.
     Calculator - a simple java program, learn about ant, sonarQube
-### stage2 - basic tasks
+stage2 - basic tasks
     Part2 - gets familiar to the GridWorld program
         CircleBug - extands the Bug class, making a bug trace an octagon.
         DancingBug - extands the Bug class, making a bug trace a certain trace the programmer has set.
@@ -26,7 +27,8 @@ the organization of the project
             implements the SparseBoundedGrid class using a sparse array.
             implesments the SparseBoundedGrid2 class using a hashmap.
             implements the UnboundedGrid2 class using a 2-dimension array.
-### stage3
+stage3
     ImageProcessing - implements the IImageIO interface and the IImageProcessor by oneself.
     MazeBug - uses DFS algorithm  to implements a maze bug. framework is provided.
     N-puzzle - uses BFS algorithm to solve an N-puzzle problem. framework of Jigsaw is provided.
+</pre>
