@@ -4,15 +4,15 @@
      
     <property name="build.classes.dir" location="build/classes"/>
     <property name="src.dir" location="src" />
-		<property name="lib.dir" location="lib" />
+	<property name="lib.dir" location="lib" />
     
 		<path id="compile.path">
-				<pathelement location="${lib.dir}/junit-4.9.jar" />
+			<pathelement location="${lib.dir}/junit-4.9.jar" />
 		</path>
 		
     <target name="clean">
-				<delete dir="${build.classes.dir}" />
-				<mkdir dir="${build.classes.dir}"/>
+		<delete dir="${build.classes.dir}" />
+		<mkdir dir="${build.classes.dir}"/>
     </target>
      
     <target name="compile">
@@ -21,17 +21,17 @@
     </target>    
 
     <target name="run" depends="clean, compile">
-				<java fork="true" classname="HelloWorld">
-						<classpath path="${build.classes.dir}" />
-				</java>
+		<java fork="true" classname="HelloWorld">
+			<classpath path="${build.classes.dir}" />
+		</java>
     </target>
 
-		<target name="junit" depends="compile">
-				<junit printsummary="true">
-						<classpath path="${src.dir}" >
-							<path refid="compile.path" />
-						</classpath>
-						<test name="HelloWorldTest"/>
-				</junit>
-		</target>
+	<target name="junit" depends="compile">
+		<junit printsummary="true">
+			<classpath path="${src.dir}" >
+				<path refid="compile.path" />
+			</classpath>
+			<test name="HelloWorldTest"/>
+		</junit>
+	</target>
 </project>
