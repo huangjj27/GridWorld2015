@@ -1,12 +1,19 @@
 import java.util.*;
 
-public class HelloWorld {
-	String str;
-	public void hello() {
-		str = "Hello World!";
-	}
-	public String getStr() {
-		return str;
-	}
-}
+public final class HelloWorld {
+  private String str;
 
+  public static void main(String[] args) {
+    HelloWorld  hw = new HelloWorld();
+    hw.hello();
+    System.out.println(hw.str);
+  }
+
+  public void hello() {
+    str = "Hello World!";
+  }
+
+  public String getStr() {
+    return str;
+  }
+}
