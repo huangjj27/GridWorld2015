@@ -12,14 +12,15 @@ public class QuickCrabCritter extends CrabCritter {
   /**
    * A QuickCrab moves to one of the two locations, randomly selected, that are
    * two spaces to its right or left.
+   *
    * @return list of empty locations immediately in two steps to the right and to
-   *  the left.
+   * the left.
    */
   public ArrayList<Location> getMoveLocations() {
     ArrayList<Location> locs = new ArrayList<Location>();
-    int[] dirs = { Location.LEFT, Location.RIGHT };
-    getMoveLocationsInDirection(locs,getDirection() + dirs[0]);
-    getMoveLocationsInDirection(locs,getDirection() + dirs[1]);
+    int[] dirs = {Location.LEFT, Location.RIGHT};
+    getMoveLocationsInDirection(locs, getDirection() + dirs[0]);
+    getMoveLocationsInDirection(locs, getDirection() + dirs[1]);
 
     if (locs.size() == 0) {
       return super.getMoveLocations();
@@ -29,6 +30,7 @@ public class QuickCrabCritter extends CrabCritter {
 
   /**
    * gets the location that is two steps far from the QuickCrab in a given direction.
+   *
    * @param locs
    * @param direction
    */

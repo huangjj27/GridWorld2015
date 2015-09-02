@@ -1,5 +1,6 @@
-import static org.junit.Assert.*;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class HelloWorldTest {
   public HelloWorld helloworld = new HelloWorld();
@@ -7,6 +8,6 @@ public class HelloWorldTest {
   @Test
   public void testHello() {
     helloworld.hello();
-    assertEquals("Hello World!",  helloworld.getStr());
-   }
+    assertEquals("Hello World!", helloworld.getStr());
+  }
 }

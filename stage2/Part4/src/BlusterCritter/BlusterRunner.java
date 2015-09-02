@@ -7,7 +7,8 @@ import info.gridworld.grid.Location;
  * This class is not tested on the AP CS A and AB exams.
  */
 public final class BlusterRunner {
-  public BlusterRunner() {}
+  public BlusterRunner() {
+  }
 
   public static void main(String[] args) {
     ActorWorld world = new ActorWorld();
@@ -18,7 +19,7 @@ public final class BlusterRunner {
     }
     for (int raw = 1; raw < 4; raw++) {
       for (int col = 1; col < 3; col++) {
-        world.add(new Location(raw, col), new BlusterCritter(2*raw+col));
+        world.add(new Location(raw, col), new BlusterCritter(2 * raw + col));
       }
     }
     world.show();

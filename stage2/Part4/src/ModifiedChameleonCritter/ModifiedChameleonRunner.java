@@ -2,7 +2,7 @@ import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * This class runs a world that contains ModifiedChameleon critters. <br />
@@ -11,7 +11,7 @@ import java.awt.Color;
 public final class ModifiedChameleonRunner {
   private ModifiedChameleonRunner() {
   }
-  
+
   public static void main(String[] args) {
     ActorWorld world = new ActorWorld();
     world.add(new Location(7, 8), new Rock());

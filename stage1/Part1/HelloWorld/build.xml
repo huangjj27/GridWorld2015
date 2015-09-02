@@ -4,39 +4,39 @@
 <project name="HelloWorld" default="run">
   <!-- essential properties to refer to -->
   <property name="build.classes.dir" location="build/classes"/>
-  <property name="src.dir" location="src" />
-  <property name="lib.dir" location="lib" />
+  <property name="src.dir" location="src"/>
+  <property name="lib.dir" location="lib"/>
 
   <path id="compile.path">
-    <pathelement location="${lib.dir}/junit-4.9.jar" />
+    <pathelement location="${lib.dir}/junit-4.9.jar"/>
   </path>
 
   <!-- target is a task, can build, change directory, Junit and so on -->
   <!-- clean up the class files that compiled last time -->
-    <target name="clean">
-      <delete dir="${build.classes.dir}" />
-      <mkdir dir="${build.classes.dir}"/>
-    </target>
+  <target name="clean">
+    <delete dir="${build.classes.dir}"/>
+    <mkdir dir="${build.classes.dir}"/>
+  </target>
 
-    <target name="compile">
-      <javac srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="compile.path" includeantruntime="true">
-      </javac>
-    </target>
+  <target name="compile">
+    <javac srcdir="${src.dir}" destdir="${build.classes.dir}" classpathref="compile.path" includeantruntime="true">
+    </javac>
+  </target>
 
-    <!-- auto run after a compilation -->
-    <target name="run" depends="clean, compile">
-      <java fork="true" classname="HelloWorld">
-        <classpath path="${build.classes.dir}" />
-      </java>
-    </target>
+  <!-- auto run after a compilation -->
+  <target name="run" depends="clean, compile">
+    <java fork="true" classname="HelloWorld">
+      <classpath path="${build.classes.dir}"/>
+    </java>
+  </target>
 
   <!-- tests the methods in HelloWorld.java -->
   <target name="junit" depends="compile">
     <junit printsummary="true">
       <classpath path="${build.classes.dir}">
-        <path refid="compile.path" />
+        <path refid="compile.path"/>
       </classpath>
-      <test name="HelloWorldTest" />
+      <test name="HelloWorldTest"/>
     </junit>
   </target>
 </project>

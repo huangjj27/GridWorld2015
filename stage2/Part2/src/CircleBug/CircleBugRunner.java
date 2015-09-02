@@ -1,27 +1,26 @@
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.grid.Location;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * This class runs a world that contains box bugs.
  */
-public final class CircleBugRunner
-{
-    /**
-     * constructs a new runner instance doing nothings
-     */
-    private CircleBugRunner() {}
+public final class CircleBugRunner {
+  /**
+   * constructs a new runner instance doing nothings
+   */
+  private CircleBugRunner() {
+  }
 
-    public static void main(String[] args)
-    {
-        ActorWorld world = new ActorWorld();
-        CircleBug alice = new CircleBug(6);
-        alice.setColor(Color.ORANGE);
-        CircleBug bob = new CircleBug(3);
-        world.add(new Location(7, 8), alice);
-        world.add(new Location(5, 5), bob);
-        world.show();
-    }
+  public static void main(String[] args) {
+    ActorWorld world = new ActorWorld();
+    CircleBug alice = new CircleBug(6);
+    alice.setColor(Color.ORANGE);
+    CircleBug bob = new CircleBug(3);
+    world.add(new Location(7, 8), alice);
+    world.add(new Location(5, 5), bob);
+    world.show();
+  }
 }
 

@@ -1,16 +1,13 @@
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
+import imagereader.IImageIO;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageProducer;
 import java.awt.image.MemoryImageSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import imagereader.IImageIO;
 
 class MyImageIO implements IImageIO {
   // Image to de dealed with
@@ -23,7 +20,7 @@ class MyImageIO implements IImageIO {
   private static int word = 2;
   // move a byte to the highest byte of an integer
   private static int highestByte = 24;
-  
+
   // used in bit-or operation 
   private static int one = 0xff;
 
@@ -117,8 +114,8 @@ class MyImageIO implements IImageIO {
       }
 
       img = Toolkit.getDefaultToolkit().createImage(
-          (ImageProducer) new MemoryImageSource(imageWidth, imageHeight,
-              pixelArray, 0, imageWidth));
+              (ImageProducer) new MemoryImageSource(imageWidth, imageHeight,
+                      pixelArray, 0, imageWidth));
     }
 
     // close the file stream and return the Image we get.
@@ -131,7 +128,7 @@ class MyImageIO implements IImageIO {
     try {
       File imgFile = new File(filepath);
       BufferedImage buffer = new BufferedImage(img.getWidth(null),
-          img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+              img.getHeight(null), BufferedImage.TYPE_INT_RGB);
       Graphics2D graph = buffer.createGraphics();
       graph.drawImage(img, 0, 0, null);
       graph.dispose();
@@ -147,14 +144,11 @@ class MyImageIO implements IImageIO {
    * <code>bytesToInt</code> is a function to manage a set of bytes to an
    * integer. for example, gets the size of the image (counting in bytes) from a
    * four-byte set.
-   * 
-   * @param bytes
-   *          the array stores the bytes' information, which can be explained
-   *          through the function
-   * @param offset
-   *          the first location in <code>bytes</code> needs to be processed.
-   * @param length
-   *          how many bytes need procession.
+   *
+   * @param bytes  the array stores the bytes' information, which can be explained
+   *               through the function
+   * @param offset the first location in <code>bytes</code> needs to be processed.
+   * @param length how many bytes need procession.
    * @return an integer transformed from the bytes with rule of Little-Endian.
    */
   private int bytesToInt(byte[] bytes, int offset, int length) {

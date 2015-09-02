@@ -17,11 +17,9 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E> {
   /**
    * Constructs an empty bounded grid with the given dimensions. (Precondition:
    * <code>rowNum > 0</code> and <code>colNum > 0</code>.)
-   * 
-   * @param rowNum
-   *          number of rows in BoundedGrid
-   * @param colNum
-   *          number of columns in BoundedGrid
+   *
+   * @param rowNum number of rows in BoundedGrid
+   * @param colNum number of columns in BoundedGrid
    */
   public SparseBoundedGrid(int rowNum, int colNum) {
     if (rowNum <= 0) {
@@ -63,7 +61,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E> {
     E oldOccupant = remove(loc);
     SparseGridNode oldRowHead = occupantArray[loc.getRow()];
     SparseGridNode newRowHead = new SparseGridNode(obj, loc.getCol(), null,
-        oldRowHead);
+            oldRowHead);
     if (oldRowHead != null) {
       oldRowHead.setPre(newRowHead);
     }
@@ -132,7 +130,6 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E> {
   }
 
   /**
-   * 
    * @param loc
    * @return
    */

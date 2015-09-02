@@ -3,14 +3,16 @@ import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * This class runs a world that contains RockHounds. <br />
  * This class is not tested on the AP CS A and AB exams.
  */
 public final class RockHoundRunner {
-  private RockHoundRunner() {}
+  private RockHoundRunner() {
+  }
+
   public static void main(String[] args) {
     ActorWorld world = new ActorWorld();
     world.add(new Location(7, 8), new Rock());

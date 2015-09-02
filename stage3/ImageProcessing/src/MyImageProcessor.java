@@ -1,23 +1,22 @@
 import imagereader.IImageProcessor;
 
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.RGBImageFilter;
 
 public class MyImageProcessor implements IImageProcessor {
   // use integer to Represent the Color
- private static int red = 1;
- private static int green = 2;
- private static int blue = 3;
- private static int gray = 0;
+  private static int red = 1;
+  private static int green = 2;
+  private static int blue = 3;
+  private static int gray = 0;
 
   @Override
   public Image showChanelR(Image sourceImage) {
     ColorFilter redFilter = new ColorFilter(red);
     Toolkit toolKit = Toolkit.getDefaultToolkit();
     Image img = toolKit.createImage(new FilteredImageSource(sourceImage
-        .getSource(), redFilter));
+            .getSource(), redFilter));
     return img;
   }
 
@@ -26,7 +25,7 @@ public class MyImageProcessor implements IImageProcessor {
     ColorFilter greenFilter = new ColorFilter(green);
     Toolkit toolKit = Toolkit.getDefaultToolkit();
     Image img = toolKit.createImage(new FilteredImageSource(sourceImage
-        .getSource(), greenFilter));
+            .getSource(), greenFilter));
     return img;
   }
 
@@ -35,7 +34,7 @@ public class MyImageProcessor implements IImageProcessor {
     ColorFilter blueFilter = new ColorFilter(blue);
     Toolkit toolKit = Toolkit.getDefaultToolkit();
     Image img = toolKit.createImage(new FilteredImageSource(sourceImage
-        .getSource(), blueFilter));
+            .getSource(), blueFilter));
     return img;
   }
 
@@ -44,28 +43,28 @@ public class MyImageProcessor implements IImageProcessor {
     ColorFilter grayFilter = new ColorFilter(gray);
     Toolkit toolKit = Toolkit.getDefaultToolkit();
     Image img = toolKit.createImage(new FilteredImageSource(sourceImage
-        .getSource(), grayFilter));
+            .getSource(), grayFilter));
     return img;
   }
 }
 
 class ColorFilter extends RGBImageFilter {
   // 3 types of color channal 
- private static int redChannel = 0xffff0000;
- private static int greenChannel = 0xff00ff00;
- private static int blueChannel = 0xff0000ff;
-  
+  private static int redChannel = 0xffff0000;
+  private static int greenChannel = 0xff00ff00;
+  private static int blueChannel = 0xff0000ff;
+
   // get the byte of one kind of color
- private static int getRed = 0x00ff0000;
- private static int getGreen = 0x0000ff00;
- private static int getBlue =  0x000000ff;
- private static int getHyaline = 0xff000000;
-  
+  private static int getRed = 0x00ff0000;
+  private static int getGreen = 0x0000ff00;
+  private static int getBlue = 0x000000ff;
+  private static int getHyaline = 0xff000000;
+
   // use integer to Represent the Color
- private static int red = 1;
- private static int green = 2;
- private static int blue = 3;
- private int color;
+  private static int red = 1;
+  private static int green = 2;
+  private static int blue = 3;
+  private int color;
 
   public ColorFilter(int c) {
     color = c;
@@ -82,7 +81,7 @@ class ColorFilter extends RGBImageFilter {
     } else {
       // algorithm of get the Gray
       int g = (int) (((rgb & getRed) >> 16) * 0.299
-          + ((rgb & getGreen) >> 8) * 0.587 + ((rgb & getBlue)) * 0.114);
+              + ((rgb & getGreen) >> 8) * 0.587 + ((rgb & getBlue)) * 0.114);
       return (rgb & getHyaline) + (g << 16) + (g << 8) + g;
     }
   }

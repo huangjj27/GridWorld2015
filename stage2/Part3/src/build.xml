@@ -6,8 +6,8 @@
   <property name="lib.dir" value="lib"/>
 
   <path id="compile.path">
-    <pathelement location = "${lib.dir}/junit-4.9.jar"/>
-    <pathelement location = "${lib.dir}/gridworld.jar"/>
+    <pathelement location="${lib.dir}/junit-4.9.jar"/>
+    <pathelement location="${lib.dir}/gridworld.jar"/>
   </path>
 
   <target name="compile">
@@ -23,16 +23,16 @@
     </junit>
   </target>
 
-  <target name= "run" depends="junit">
-    <java fork = "true" classname="JumperRunner" classpath="${run.classpath}" classpathref="compile.path"/>
+  <target name="run" depends="junit">
+    <java fork="true" classname="JumperRunner" classpath="${run.classpath}" classpathref="compile.path"/>
   </target>
 
-    <target name="doc">
-        <javadoc destdir="" encoding="UTF-8" docencoding="UTF-8">
-            <packageset dir="${run.srcpath}">
-                <include name="**"/>
-            </packageset>
-        </javadoc>
-    </target>
+  <target name="doc">
+    <javadoc destdir="" encoding="UTF-8" docencoding="UTF-8">
+      <packageset dir="${run.srcpath}">
+        <include name="**"/>
+      </packageset>
+    </javadoc>
+  </target>
 
 </project>

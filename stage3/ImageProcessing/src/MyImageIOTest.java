@@ -1,16 +1,13 @@
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * @author 13331087_HuangJunJie
@@ -47,11 +44,9 @@ public class MyImageIOTest {
 
   /**
    * Compares the pixel of two images <code>img1</code> and <code>img2</code>
-   * 
-   * @param img1
-   *          an image type object
-   * @param img2
-   *          another image object
+   *
+   * @param img1 an image type object
+   * @param img2 another image object
    * @return true if the two images match and false otherwise.
    */
   public boolean compare(Image img1, Image img2) {
@@ -59,7 +54,7 @@ public class MyImageIOTest {
     BufferedImage buffer2 = getBuffer(img2);
 
     if (img1.getHeight(null) != img2.getHeight(null)
-        || img1.getWidth(null) != img2.getWidth(null)) {
+            || img1.getWidth(null) != img2.getWidth(null)) {
       return false;
     }
     for (int row = 0; row < img1.getHeight(null); row++) {
@@ -74,13 +69,13 @@ public class MyImageIOTest {
 
   /**
    * gets a bufferImage type for an image type.
-   * 
+   *
    * @param <code>img</code> an image type object
    * @return the bufferedImage of <code>img</code>
    */
   public BufferedImage getBuffer(Image img) {
     BufferedImage buffer = new BufferedImage(img.getWidth(null),
-        img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+            img.getHeight(null), BufferedImage.TYPE_INT_RGB);
     Graphics2D graph = buffer.createGraphics();
     graph.drawImage(img, 0, 0, null);
 

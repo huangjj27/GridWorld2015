@@ -3,14 +3,12 @@ package jigsaw;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.Vector;
 
 /**
  * 在此类中填充算法，完成重拼图游戏（N-数码问题）
- * 
+ *
  * @author abe
- * 
  */
 public class Jigsaw {
   JigsawNode beginJNode; // 拼图的起始状态节点
@@ -24,11 +22,9 @@ public class Jigsaw {
 
   /**
    * 拼图构造函数
-   * 
-   * @param bNode
-   *          - 初始状态节点
-   * @param eNode
-   *          - 目标状态节点
+   *
+   * @param bNode - 初始状态节点
+   * @param eNode - 目标状态节点
    */
   public Jigsaw(JigsawNode bNode, JigsawNode eNode) {
     this.beginJNode = new JigsawNode(bNode);
@@ -43,11 +39,9 @@ public class Jigsaw {
 
   /**
    * 此函数用于打散拼图：将输入的初始状态节点jNode随机移动len步，返回其打散后的状态节点
-   * 
-   * @param jNode
-   *          - 初始状态节点
-   * @param len
-   *          - 随机移动的步数
+   *
+   * @param jNode - 初始状态节点
+   * @param len   - 随机移动的步数
    * @return 打散后的状态节点
    */
   public static JigsawNode scatter(JigsawNode jNode, int len) {
@@ -67,7 +61,7 @@ public class Jigsaw {
 
   /**
    * 获取拼图的当前状态节点
-   * 
+   *
    * @return currentJNode - 拼图的当前状态节点
    */
   public JigsawNode getCurrentJNode() {
@@ -76,9 +70,8 @@ public class Jigsaw {
 
   /**
    * 设置拼图的初始状态节点
-   * 
-   * @param jNode
-   *          - 拼图的初始状态节点
+   *
+   * @param jNode - 拼图的初始状态节点
    */
   public void setBeginJNode(JigsawNode jNode) {
     beginJNode = jNode;
@@ -86,7 +79,7 @@ public class Jigsaw {
 
   /**
    * 获取拼图的初始状态节点
-   * 
+   *
    * @return beginJNode - 拼图的初始状态节点
    */
   public JigsawNode getBeginJNode() {
@@ -95,9 +88,8 @@ public class Jigsaw {
 
   /**
    * 设置拼图的目标状态节点
-   * 
-   * @param jNode
-   *          - 拼图的目标状态节点
+   *
+   * @param jNode - 拼图的目标状态节点
    */
   public void setEndJNode(JigsawNode jNode) {
     this.endJNode = jNode;
@@ -105,7 +97,7 @@ public class Jigsaw {
 
   /**
    * 获取拼图的目标状态节点
-   * 
+   *
    * @return endJNode - 拼图的目标状态节点
    */
   public JigsawNode getEndJNode() {
@@ -114,7 +106,7 @@ public class Jigsaw {
 
   /**
    * 获取拼图的求解状态
-   * 
+   *
    * @return isCompleted - 拼图已解为true；拼图未解为false
    */
   public boolean isCompleted() {
@@ -123,7 +115,7 @@ public class Jigsaw {
 
   /**
    * 计算解的路劲
-   * 
+   *
    * @return 若有解，则将结果保存在solutionPath中，返回true; 若无解，则返回false
    */
   private boolean calSolutionPath() {
@@ -142,9 +134,9 @@ public class Jigsaw {
 
   /**
    * 获取解路径文本
-   * 
+   *
    * @return 解路径solutionPath的字符串，若有解，则分行记录从初始状态到达目标状态的移动路径中的每一个状态节点；
-   *         若未解或无解，则返回提示信息。
+   * 若未解或无解，则返回提示信息。
    */
   public String getSolutionPath() {
     String str = new String();
@@ -161,7 +153,7 @@ public class Jigsaw {
 
   /**
    * 获取访问过的节点数searchedNodesNum
-   * 
+   *
    * @return 返回所有已访问过的节点总数
    */
   public int getSearchedNodesNum() {
@@ -172,9 +164,8 @@ public class Jigsaw {
    * 将搜索结果写入文件中，同时显示在控制台 若搜索失败，则提示问题无解，输出已访问节点数；
    * 若搜索成功，则输出初始状态beginJnode，目标状态endJNode
    * ，已访问节点数searchedNodesNum，路径深度nodeDepth和解路径solutionPath。
-   * 
-   * @param pw
-   *          - 文件输出PrintWriter类对象，如果pw为null，则写入到D://Result.txt
+   *
+   * @param pw - 文件输出PrintWriter类对象，如果pw为null，则写入到D://Result.txt
    * @throws IOException
    */
   public void printResult(PrintWriter pw) throws IOException {
@@ -192,7 +183,7 @@ public class Jigsaw {
       pw.println(this.getSolutionPath());
       pw.println("Total number of searched nodes:" + this.getSearchedNodesNum());
       pw.println("Length of the solution path is:"
-          + this.getCurrentJNode().getNodeDepth());
+              + this.getCurrentJNode().getNodeDepth());
 
       // 输出到控制台
       System.out.println("Jigsaw Completed");
@@ -201,9 +192,9 @@ public class Jigsaw {
       System.out.println("Solution Path: ");
       System.out.println(this.getSolutionPath());
       System.out.println("Total number of searched nodes:"
-          + this.getSearchedNodesNum());
+              + this.getSearchedNodesNum());
       System.out.println("Length of the solution path is:"
-          + this.getCurrentJNode().getNodeDepth());
+              + this.getCurrentJNode().getNodeDepth());
 
     } else {
       // 写入文件
@@ -217,7 +208,7 @@ public class Jigsaw {
       System.out.println("Begin state:" + this.getBeginJNode().toString());
       System.out.println("End state:" + this.getEndJNode().toString());
       System.out.println("Total number of searched nodes:"
-          + this.getSearchedNodesNum());
+              + this.getSearchedNodesNum());
     }
     if (flag)
       pw.close();
@@ -225,9 +216,8 @@ public class Jigsaw {
 
   /**
    * 探索所有与jNode邻接(上、下、左、右)且未曾被访问的节点
-   * 
-   * @param jNode
-   *          - 要探索的节点
+   *
+   * @param jNode - 要探索的节点
    * @return 包含所有与jNode邻接且未曾被访问的节点的Vector<JigsawNode>对象
    */
   private Vector<JigsawNode> findFollowJNodes(JigsawNode jNode) {
@@ -236,7 +226,7 @@ public class Jigsaw {
     for (int i = 0; i < 4; i++) {
       tempJNode = new JigsawNode(jNode);
       if (tempJNode.move(i) && !this.closeList.contains(tempJNode)
-          && !this.openList.contains(tempJNode))
+              && !this.openList.contains(tempJNode))
         followJNodes.addElement(tempJNode);
     }
     return followJNodes;
@@ -244,15 +234,14 @@ public class Jigsaw {
 
   /**
    * 排序插入openList：按照节点的代价估值（estimatedValue）将节点插入openList中，估值小的靠前。
-   * 
-   * @param jNode
-   *          - 要插入的状态节点
+   *
+   * @param jNode - 要插入的状态节点
    */
   private void sortedInsertOpenList(JigsawNode jNode) {
     this.estimateValue(jNode);
     for (int i = 0; i < this.openList.size(); i++) {
       if (jNode.getEstimatedValue() < this.openList.elementAt(i)
-          .getEstimatedValue()) {
+              .getEstimatedValue()) {
         this.openList.insertElementAt(jNode, i);
         return;
       }
@@ -276,7 +265,7 @@ public class Jigsaw {
   /**
    * （实验一）广度优先搜索算法，求解指定3*3拼图（8-数码问题）的最优解。 要求函数结束后： 1,isCompleted记录了求解完成状态；
    * 2,closeList记录了所有访问过的节点； 3,searchedNodesNum记录了访问过的节点数； 4,solutionPath记录了解路径。
-   * 
+   *
    * @return isCompleted, 搜索成功时为true,失败为false
    * @throws IOException
    */
@@ -319,8 +308,8 @@ public class Jigsaw {
    * （Demo+实验二）启发式搜索。访问节点数大于30000个则认为搜索失败。 函数结束后：isCompleted记录了求解完成状态；
    * closeList记录了所有访问过的节点； searchedNodesNum记录了访问过的节点数； solutionPath记录了解路径。
    * 搜索过程和结果会记录在D://DemoASearchDialog.txt中。
-   * 
-   * @return 搜索成功返回true,失败返回false
+   *
+   * @return 搜索成功返回true, 失败返回false
    * @throws IOException
    */
   public boolean ASearch() throws IOException {
@@ -359,11 +348,11 @@ public class Jigsaw {
 
       // 记录并显示搜索过程
       pw.println("Searching.....Number of searched nodes:"
-          + this.closeList.size() + "   Current state:"
-          + this.currentJNode.toString());
+              + this.closeList.size() + "   Current state:"
+              + this.currentJNode.toString());
       System.out.println("Searching.....Number of searched nodes:"
-          + this.closeList.size() + "   Current state:"
-          + this.currentJNode.toString());
+              + this.closeList.size() + "   Current state:"
+              + this.currentJNode.toString());
 
       // (2-3)寻找所有与currentJNode邻接且未曾被访问的节点，将它们按代价估值从小到大排序插入openList中
       followJNodes = this.findFollowJNodes(this.currentJNode);
@@ -384,9 +373,8 @@ public class Jigsaw {
    * uncorrect(n)代表后续节点不正确的数码个数, depth(n) is the depth from beginJNode to Node
    * n. manhattan(n) is the manhattan distance from a position of currentJNode
    * to endJNode
-   * 
-   * @param jNode
-   *          - 要计算代价估计值的节点；此函数会改变该节点的estimatedValue属性值。
+   *
+   * @param jNode - 要计算代价估计值的节点；此函数会改变该节点的estimatedValue属性值。
    */
 
   private void estimateValue(JigsawNode jNode) {
@@ -428,7 +416,7 @@ public class Jigsaw {
         }
       }
     }
-    
+
     // this formula has a success property of 12 in 20 test.
     // int estimate = (int) (uncorrectAfter * 350 + manhattanDistance * 700 + distance * 250 + uncorrectPiece * 0);
     // this formula has a success property of 12 in 20 test.
@@ -439,7 +427,7 @@ public class Jigsaw {
     int estimate = (int) (uncorrectAfter * 382 + manhattanDistance * 618 + distance * 200 + uncorrectPiece * 0);
     // this formula has a success property of 15 in 20 test.
     // int estimate = (int) (uncorrectAfter * 420 + manhattanDistance * 679 + distance * 200 + uncorrectPiece * 0);
-    
+
     jNode.setEstimatedValue(estimate);
   }
 

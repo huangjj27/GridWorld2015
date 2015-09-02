@@ -9,7 +9,9 @@ import info.gridworld.grid.Location;
  * This class is not tested on the AP CS A and AB exams.
  */
 public final class QuickCrabRunner {
-  private QuickCrabRunner() {}
+  private QuickCrabRunner() {
+  }
+
   public static void main(String[] args) {
     ActorWorld world = new ActorWorld();
     world.add(new Location(7, 5), new Rock());

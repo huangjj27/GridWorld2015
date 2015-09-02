@@ -1,6 +1,8 @@
 import info.gridworld.grid.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An <code>SparseBoundedGrid2</code> is a rectangular grid with an bounded
@@ -14,11 +16,9 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E> {
   /**
    * Constructs an empty bounded grid with the given dimensions. (Precondition:
    * <code>rowNum > 0</code> and <code>colNum > 0</code>.)
-   * 
-   * @param rowNum
-   *          number of rows in BoundedGrid
-   * @param colNum
-   *          number of columns in BoundedGrid
+   *
+   * @param rowNum number of rows in BoundedGrid
+   * @param colNum number of columns in BoundedGrid
    */
   public SparseBoundedGrid2(int rowNum, int colNum) {
     if (rowNum <= 0) {

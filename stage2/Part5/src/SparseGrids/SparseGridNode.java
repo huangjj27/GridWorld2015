@@ -5,7 +5,7 @@ public class SparseGridNode {
   private SparseGridNode pre;
 
   public SparseGridNode(Object occ, int column,
-    SparseGridNode newPre, SparseGridNode newNext) {
+                        SparseGridNode newPre, SparseGridNode newNext) {
     occupant = occ;
     col = column;
     pre = newPre;
@@ -37,7 +37,7 @@ public class SparseGridNode {
   public void setPre(SparseGridNode newPre) {
     pre = newPre;
   }
-  
+
   public void setNext(SparseGridNode newNext) {
     next = newNext;
   }

@@ -2,7 +2,7 @@ import info.gridworld.actor.Actor;
 import info.gridworld.actor.Critter;
 import info.gridworld.grid.Location;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -19,8 +19,7 @@ public class BlusterCritter extends Critter {
   /**
    * constructs a BlustCritter with a courage
    *
-   * @param c
-   *          the courage needed for a BlustCritter to brighten itself
+   * @param c the courage needed for a BlustCritter to brighten itself
    */
   public BlusterCritter(int c) {
     courage = c;

@@ -6,12 +6,11 @@ import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.*;
 
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
-
-import javax.swing.JOptionPane;
 
 /**
  * A <code>MazeBug</code> can find its way in a maze. <br />
@@ -27,7 +26,7 @@ public class MazeBug extends Bug {
   boolean hasShown = false;// final message has been shown
   // four direction prediction possibility.
   // four number stand for NORTH, EAST, SOUTH, West.
-  public int[] dirPrc = { 1, 1, 1, 1 };
+  public int[] dirPrc = {1, 1, 1, 1};
   private static int rightAngle = 90;
 
   /**
@@ -46,7 +45,7 @@ public class MazeBug extends Bug {
 
   public String getPredict() {
     return "[" + dirPrc[0] + ", " + dirPrc[1] + ", " + dirPrc[2] + ", "
-        + dirPrc[3] + "]";
+            + dirPrc[3] + "]";
   }
 
   /**
@@ -129,11 +128,10 @@ public class MazeBug extends Bug {
 
   /**
    * Find all positions that can be move to.
-   * 
-   * @param loc
-   *          the location to detect.
+   *
+   * @param loc the location to detect.
    * @return List of positions. only the empty location and the destination will
-   *         be added.
+   * be added.
    */
   public ArrayList<Location> getValid(Location loc) {
     Grid<Actor> gr = getGrid();
@@ -141,8 +139,8 @@ public class MazeBug extends Bug {
       return null;
     }
     ArrayList<Location> valid = new ArrayList<Location>();
-    int directions[] = { Location.NORTH, Location.EAST, Location.SOUTH,
-        Location.WEST };
+    int directions[] = {Location.NORTH, Location.EAST, Location.SOUTH,
+            Location.WEST};
 
     for (int d : directions) {
       Location neighbor = loc.getAdjacentLocation(d);
@@ -165,7 +163,7 @@ public class MazeBug extends Bug {
   /**
    * Tests whether this bug can move forward into a location that is empty or
    * contains a flower.
-   * 
+   *
    * @return true if this bug can move.
    */
   public boolean canMove() {
